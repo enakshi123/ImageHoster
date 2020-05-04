@@ -19,12 +19,17 @@ import java.util.Comparator;
 public class ImageUploadService {
 
     @Autowired
-    private ImageDao imageDao;
+   private ImageDao imageDao;
 
-    @Transactional(propagation = Propagation.REQUIRED)
-    public ImageEntity upload(ImageEntity imageEntity, final String authorizationToken) throws UploadFailedException {
-        UserAuthTokenEntity userAuthTokenEntity = imageDao.getUserAuthToken(authorizationToken);
+   @Transactional(propagation = Propagation.REQUIRED)
+   public ImageEntity upload(ImageEntity imageEntity, final String authorizationToken) throws UploadFailedException {
+       UserAuthTokenEntity userAuthTokenEntity = imageDao.getUserAuthToken(authorizationToken);
 
-        imageEntity.setUser_id(userAuthTokenEntity.getUser());
+       if (userAuthTokenEntity == null) {
+           throw new UploadFailedException("UP-001", "User is not Signed in, sign in to upload an image");
+       }
+       imageEntity.setUser_id(userAuthTokenEntity.getUser());
+       return imageDao.createImage(imageEntity);
+
     }
 }

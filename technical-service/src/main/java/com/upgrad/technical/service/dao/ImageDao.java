@@ -5,6 +5,7 @@ import com.upgrad.technical.service.entity.UserAuthTokenEntity;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
+//import javax.persistence.NoResultException;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
@@ -15,19 +16,40 @@ public class ImageDao {
     private EntityManager entityManager;
 
     public ImageEntity createImage(ImageEntity imageEntity) {
-        entityManager.persist(imageEntity);
-    }
+       entityManager.persist(imageEntity);
+        return imageEntity;
 
-    public UserAuthTokenEntity getUserAuthToken(final String accesstoken) {
-    }
+   }
+
+   public UserAuthTokenEntity getUserAuthToken(final String accesstoken) {
+       try{
+           return entityManager.createNamedQuery("userAuthTokenByAccessToken", UserAuthTokenEntity.class).setParameter("accessToken", accesstoken).getSingleResult();
+       }catch (NoResultException nre){
+           return null;
+       }
+  }
 
     public ImageEntity getImage(final String imageUuid) {
-    }
+        try{
+            return entityManager.createNamedQuery("ImageEntityByUuid", ImageEntity.class).setParameter("uuid", imageUuid).getSingleResult();
+        }catch (NoResultException nre){
+            return null;
+        }
+        }
 
-    public ImageEntity getImageById(final long Id) {
-    }
 
-    public ImageEntity updateImage(final ImageEntity imageEntity) {
+   public ImageEntity getImageById(final long Id) {
+       try{
+           return entityManager.createNamedQuery("ImageEntityById", ImageEntity.class).setParameter("id", Id).getSingleResult();
+       }catch (NoResultException nre){
+           return null;
+       }
 
-    }
+   }
+
+
+   public ImageEntity updateImage(final ImageEntity imageEntity) {
+       return entityManager.merge(imageEntity);
+
+}
 }
