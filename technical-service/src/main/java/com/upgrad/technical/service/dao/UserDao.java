@@ -29,11 +29,10 @@ public class UserDao {
             return null;
         }
     }
-
     public UserAuthTokenEntity createAuthToken(final UserAuthTokenEntity userAuthTokenEntity) {
-        this.entityManager.persist(userAuthTokenEntity);
-        return userAuthTokenEntity;
-    }
+       this.entityManager.persist(userAuthTokenEntity);
+       return userAuthTokenEntity;
+   }
 
     public void updateUser(final UserEntity updatedUserEntity) {
         entityManager.merge(updatedUserEntity);
