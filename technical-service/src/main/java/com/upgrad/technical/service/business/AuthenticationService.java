@@ -21,13 +21,13 @@ public class AuthenticationService {
     @Autowired
     private PasswordCryptographyProvider CryptographyProvider;
 
-    @Transactional(propagation = Propagation.REQUIRED)
-    public UserAuthTokenEntity authenticate(final String username, final String password) throws AuthenticationFailedException {
-        UserEntity userEntity = userDao.getUserByEmail(username);
-
-        final String encryptedPassword = CryptographyProvider.encrypt(password, userEntity.getSalt());
-
-    }
+    //@Transactional(propagation = Propagation.REQUIRED)
+//    public UserAuthTokenEntity authenticate(final String username, final String password) throws AuthenticationFailedException {
+//        UserEntity userEntity = userDao.getUserByEmail(username);
+//
+//        final String encryptedPassword = CryptographyProvider.encrypt(password, userEntity.getSalt());
+//
+//    }
 }
 
 
