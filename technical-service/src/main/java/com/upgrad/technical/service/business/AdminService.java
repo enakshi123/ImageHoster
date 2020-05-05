@@ -35,6 +35,8 @@
 //        UserAuthTokenEntity userAuthTokenEntity = imageDao.getUserAuthToken(authorization);
 //
 //        String role = userAuthTokenEntity.getUser().getRole();
+
+
 //
 //    }
 //}
