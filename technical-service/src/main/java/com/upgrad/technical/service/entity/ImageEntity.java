@@ -15,7 +15,7 @@ import java.time.ZonedDateTime;
 @Table(name = "IMAGES", schema = "imagehoster")
 @NamedQueries({
         @NamedQuery(name = "ImageEntityByUuid", query = "select i from ImageEntity i where i.uuid = :uuid"),
-        @NamedQuery(name = "ImageEntityByid", query = "select i from ImageEntity i where i.id = :id")
+        @NamedQuery(name = "ImageEntityById", query = "select i from ImageEntity i where i.id = :id")
 })
 public class ImageEntity implements Serializable {
 
